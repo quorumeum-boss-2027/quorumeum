@@ -38,6 +38,33 @@ some initial blocks.
 
 ### There is only one success condition: New blocks are continuously and automatically being added to the chain, without human intervention, and relying only on Quorumeum full nodes and the peer-to-peer protocol.
 
+# BOSS 2027 network details
+
+| | |
+|---|---|
+| Signet challenge | `512060a87c761603ebd6a0e3458c072c5d4865784a188ca667f27b182b81feaf9d48` |
+| Signet address | `tb1pvz58caskq04adg8rgkxqwtzafpjhsjsc3jnx0unmrq4crl40n4yq9lhu3e` |
+| Administrator node | `quorumeum.diogenes.guru:38333` |
+| Block explorer | https://quorumeum.diogenes.guru |
+
+Start a node on the chain with:
+
+```
+bitcoind -signet -signetchallenge=512060a87c761603ebd6a0e3458c072c5d4865784a188ca667f27b182b81feaf9d48 -addnode=quorumeum.diogenes.guru:38333
+```
+
+Each participant receives exactly one of the 100 multisig descriptors by direct message
+from the BOSS bot. It is private: do not share it, post it, or commit it (see [Cheating](#cheating)).
+
+The administrator node mines one block per hour with the internal key until the group's
+nodes take over. Two blocks on the explorer show what the two signet solutions look like:
+
+* [Block 3](https://quorumeum.diogenes.guru/block/000002dfd22555eaa8f0ea3b14aae4ad4a1d95c2a47b721f3dbd45c8b1cb237c):
+  signed by the administrator's internal key alone (taproot key path, 72-byte solution).
+* [Block 4](https://quorumeum.diogenes.guru/block/0000019ddf343d3a4ef082937b77fc48b8ce35d3899b534127febd9eaf2d3dbb):
+  signed by 10 of the 100 multisig keys (taproot script path, 4195-byte solution: ten
+  signatures, ninety empty witness items, the `multi_a` script and the control block).
+
 # Specification
 
 A required component of this project is the addition of a new P2P message to the
